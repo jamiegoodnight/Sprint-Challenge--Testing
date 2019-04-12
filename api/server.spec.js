@@ -31,19 +31,19 @@ describe("server CRUD", () => {
   describe("POST", () => {
     it("should respond with 201 created", () => {
       return request(server)
-        .post("/addGame")
+        .post("/games")
         .send({ title: "Sonic", genre: "Platformer" })
         .expect(201);
     });
     it("should respond with 422 without genre", () => {
       return request(server)
-        .post("/addGame")
+        .post("/games")
         .send({ title: "Pokemon", genre: null })
         .expect(422);
     });
     it("should respond with JSON", () => {
       return request(server)
-        .post("/addGame")
+        .post("/games")
         .send({ title: "World of Warcraft", genre: "MMO" })
         .expect("Content-Type", /json/);
     });
