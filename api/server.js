@@ -22,12 +22,11 @@ server.post("/games", (req, res) => {
   const newGame = req.body;
 
   if (newGame.title && newGame.genre) {
-    games.push(newGame).then(res => {
-      res.status(201).json(newGame);
-    });
+    games.push(newGame);
+    res.status(201).json(newGame);
   } else {
     res
-      .status(400)
+      .status(422)
       .res({ message: "Please provide a title and genre for your game!" });
   }
 });
