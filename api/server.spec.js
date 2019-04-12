@@ -4,6 +4,7 @@ const server = require("./server");
 
 const games = [
   {
+    id: 1,
     title: "Pacman", // required
     genre: "Arcade", // required
     releaseYear: 1980 // not required
@@ -46,6 +47,14 @@ describe("server CRUD", () => {
         .post("/games")
         .send({ title: "World of Warcraft", genre: "MMO" })
         .expect("Content-Type", /json/);
+    });
+    it("should respond with 'No duplicate game titles!'", () => {
+      return request(server)
+        .post("/games")
+        .send({ title: "Pacman", genre: "Arcade" })
+        .then(res => {
+          expect(res.body).toEqual({ message: "No duplicate game titles!" });
+        });
     });
   });
 });
